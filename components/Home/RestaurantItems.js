@@ -5,7 +5,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { useNavigation } from "@react-navigation/native";
 
 export default function RestaurantItems({ restaurantData, navigation }) {
-  console.log("restaurantData", restaurantData);
+  // console.log("restaurantData", restaurantData);
   return (
     <>
       {restaurantData?.map((restaurant, index) => {

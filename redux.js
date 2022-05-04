@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const cartSlice = createSlice({
   name: "cart",
@@ -15,16 +16,34 @@ const cartSlice = createSlice({
       } else {
         state.push(action.payload);
       }
+      console.log("Redux cart =>", state);
     },
   },
 });
 
+// const userSlice = createSlice({
+//   name: "user",
+//   initialState: AsyncStorage.get("userToken") || null,
+//   reducers: {
+//     tokenUser: (state, action) => {
+//       if (action.payload) {
+//         AsyncStorage.set("userToken", action.payload);
+//       } else {
+//         AsyncStorage.remove("userToken");
+//       }
+//       state = action.payload;
+//     },
+//   },
+// });
+
 export const { toggleDish } = cartSlice.actions;
+// export const { tokenUser } = userSlice.actions;
 
 // Entrepôt des données et des actions que l'on peut effectuer sur l'application
 export const store = configureStore({
   reducer: {
     cart: cartSlice.reducer,
+    // user: userSlice.reducer,
   },
 });
 

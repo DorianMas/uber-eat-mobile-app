@@ -6,14 +6,12 @@ import {
   ScrollView,
   FlatList,
 } from "react-native";
-import { useState } from "react";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-
 import { Divider } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDish } from "../../redux";
 
-export default function MenuItems() {
+export default function MenuItems({ route }) {
   const dispatch = useDispatch();
 
   //Appel du State dédié au panier de commande
@@ -22,6 +20,8 @@ export default function MenuItems() {
   // Fonction pour vérifier le plat sélectionné : si la fonction retourne True, la checkbox restera activée
   const isDishInCart = (dish) =>
     Boolean(reduxCart.cart.find((elem) => elem.title === dish.title));
+
+  // console.log("route =>", route);
 
   return (
     <ScrollView>

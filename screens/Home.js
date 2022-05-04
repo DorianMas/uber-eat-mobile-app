@@ -12,11 +12,28 @@ import BottomTabs from "../components/Home/BottomTabs";
 
 import { YELP_API_KEY } from "@env";
 
-export default function Home({ navigation }) {
-  const [restaurantData, setRestaurantData] = useState();
+export default function Home({
+  navigation,
+  token,
+  setToken,
+  tokenUser,
+  restaurantData,
+  setRestaurantData,
+}) {
   const [citySelected, setCitySelected] = useState("Paris");
   const [activeTab, setActiveTab] = useState("Delivery");
+
   useEffect(() => {
+    if (typeof token !== String && token !== null) {
+      if (token._W === null) {
+        setToken(null);
+      }
+      // else if (token._W !== null) {
+      //   const newToken = { ...token };
+      //   console.log("newToken =>", newToken);
+      //   setToken(newToken._w);
+      // }
+    }
     const fetchData = async () => {
       const response = await axios.get(
         `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${citySelected}`,
@@ -53,7 +70,7 @@ export default function Home({ navigation }) {
           navigation={navigation}
         />
       </ScrollView>
-      <BottomTabs />
+      <BottomTabs token={token} setToken={setToken} />
     </SafeAreaView>
   );
 }
